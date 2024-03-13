@@ -63,21 +63,32 @@ def generate_frames():
 
                 matchIndex = np.argmin(faceDis)
 
+                # if matches[matchIndex]:
+                #     # Update the student information using studentIds[matchIndex]
+                #     student_id = studentIds[matchIndex]
+                #     student_info = db.reference(f'Students/{student_id}').get()
+                #     if student_info is not None:  # Check if student_info is not None
+                #         print(student_info)
+                #         if student_info == True:
+                #         # Check if attendance is not already marked in the last minute
+                            
+                #             last_attendance_time = datetime.strptime(
+                #                 student_info.get('last_attendance', '1970-01-01 00:00:00'), "%Y-%m-%d %H:%M:%S.%f")
+                #             if (datetime.now() - last_attendance_time).total_seconds() / 60 > 60:
+                #                 # Perform any other actions or display student_info as needed
+                #                 print(f"Marked attendance for {student_info['name']}")
+                #                 mark_attendance(student_id)
                 if matches[matchIndex]:
-                    # Update the student information using studentIds[matchIndex]
                     student_id = studentIds[matchIndex]
                     student_info = db.reference(f'Students/{student_id}').get()
-                    if student_info is not None:  # Check if student_info is not None
-                        print(student_info)
-                        if student_info == True:
-                        # Check if attendance is not already marked in the last minute
-                            
-                            last_attendance_time = datetime.strptime(
-                                student_info.get('last_attendance', '1970-01-01 00:00:00'), "%Y-%m-%d %H:%M:%S.%f")
-                            if (datetime.now() - last_attendance_time).total_seconds() / 60 > 60:
-                                # Perform any other actions or display student_info as needed
-                                print(f"Marked attendance for {student_info['name']}")
-                                mark_attendance(student_id)
+                    if student_info is not None:
+                        # print(student_info)
+                        last_attendance_time = datetime.strptime(
+                            student_info.get('last_attendance', '1970-01-01 00:00:00'), "%Y-%m-%d %H:%M:%S.%f")
+                        if (datetime.now() - last_attendance_time).total_seconds() / 60 > 60:
+                            print(f"Marked attendance for {student_info['name']}")
+                            mark_attendance(student_id)
+
 
                             # Redirect to the home page after face recognition
                             # return redirect(url_for('index'))
