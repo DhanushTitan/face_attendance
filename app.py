@@ -113,7 +113,7 @@ def add_student():
         major = request.form['major']
         start_year = int(request.form['start_year'])
         total_attendance = int(request.form['total_attendance'])
-        student_class = request.form['student_class']  # Changed from 'class' to 'student_class'
+        student_class = request.form['student_class']  # Corrected the typo
         year = int(request.form['year'])
         last_attendance = request.form['last_attendance']
 
@@ -131,6 +131,7 @@ def add_student():
         return redirect(url_for('upload'))
 
     return render_template('add.html')
+
 
 @app.route('/student')
 def detail():
